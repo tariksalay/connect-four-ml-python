@@ -1,44 +1,41 @@
-# Connect Four — Python Minimax Game
+# Connect Four with a Minimax Opponent
 
-**Python · Pygame · NumPy · Minimax Search · Heuristic Evaluation**
+**Python · NumPy · Pygame · Minimax · Alpha-beta pruning**
 
-An interactive Connect Four game built with Pygame, featuring a computer opponent that selects moves using depth-limited **minimax search** and a hand-designed board-scoring heuristic.
+A local Connect Four game with a computer opponent. A NumPy board stores the position, a heuristic scores candidate windows, and a depth-three minimax search chooses the computer’s move.
 
-## How it works
+## What this project demonstrates
 
-- Models a traditional 7-column × 6-row Connect Four board with NumPy.
-- Checks horizontal, vertical, and diagonal four-in-a-row winning conditions.
-- Evaluates candidate moves using center-column preference, possible four-piece windows, and opponent threats.
-- Searches alternating moves with a minimax depth of **3** in the current game loop.
-- Draws the board and handles player input through Pygame.
+- Board modeling and detection of horizontal, vertical, and diagonal wins.
+- Alternating game-tree search with alpha-beta pruning.
+- A Pygame interface separated from importable, testable game logic.
 
-## Key code
+## Start here
 
-| Function | Responsibility |
+| Read | Use it for |
 | --- | --- |
-| `create_board` / `drop_piece` | Store board state and make moves |
-| `winning_move` | Detect a winning four-piece alignment |
-| `evaluate_window` / `score_position` | Score board positions |
-| `minmax` | Explore possible turns and choose the best available move |
-| `draw_board` | Render the current game state |
+| [Project walkthrough](docs/PROJECT_GUIDE.md) | Purpose, workflow, repository map, and a concrete example |
+| [Code and artifact reference](docs/CODE_REFERENCE.md) | Important files, functions, classes, and their responsibilities |
+| [Development guide](docs/DEVELOPMENT.md) | Setup, configuration, commands, tests, and remaining limitations |
 
-## Original demonstration
+## Explore locally
 
-[Watch the original video on Vimeo](https://vimeo.com/373323901)
+Use Python 3.11 or 3.12 in a virtual environment.
 
-## Running locally
-
-The single-file program is [connect_4.py](connect_4.py). A typical exploratory setup would require Python, NumPy, and Pygame. The file also imports `mcts`, but **no `mcts.py` module is included in this repository**, which may cause an import failure even though the game loop uses `minmax`.
-
-```bash
-pip install numpy pygame
+```sh
+python -m pip install -r requirements.txt
 python connect_4.py
+python -m unittest discover -s tests -v
 ```
 
-These commands describe the intended execution path, **not a currently verified working installation**. To run successfully, resolve the missing `mcts` dependency or remove its unused import as a separate code change.
+## Validation and scope
 
-## Limitations
+Five unit tests pass for game rules, tactical choices, draws, invalid columns, and board nonmutation. The Pygame interface also launched and closed using an SDL dummy display. Human interaction on a desktop and competitive AI strength have not been benchmarked. This is search-based game AI, not a trained model.
 
-This is a learning project and not a benchmarked competitive game AI. The current minimax implementation has a fixed search depth and does not implement alpha-beta pruning. The name "ML" in the repository name refers to game-search AI; **there is no trained machine-learning model** in the current code.
+[Original demonstration](https://vimeo.com/373323901) is retained for historical context.
 
-[GitHub profile](https://github.com/tariksalay)
+---
+
+[GitHub profile](https://github.com/tariksalay) · [Portfolio](https://tariksalay.github.io/) · [Earlier README](README_HISTORY.md)
+
+The earlier README is preserved as historical context; the guides above describe this branch's implementation.
